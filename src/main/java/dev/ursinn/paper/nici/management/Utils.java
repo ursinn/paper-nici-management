@@ -24,8 +24,29 @@
 
 package dev.ursinn.paper.nici.management;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
 public class Utils {
 
     private Utils() {}
 
+    public static @NotNull Component getWorldName(Player player) {
+        return Component.text()
+                .content(player.getWorld().getName().toUpperCase().substring(0, 1))
+                .build();
+    }
+
+    public static @NotNull Component getPrefix(Player player) {
+        if (player.hasPermission("nici.management.admin")) {
+            return Component.text()
+                    .content("[Admin] ").color(NamedTextColor.RED)
+                    .append(Component.text(player.getName()).color(NamedTextColor.GOLD))
+                    .build();
+        }
+
+        return Component.text(player.getName()).color(NamedTextColor.GREEN);
+    }
 }

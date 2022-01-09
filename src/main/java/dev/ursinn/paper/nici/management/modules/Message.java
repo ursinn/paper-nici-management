@@ -24,10 +24,13 @@
 
 package dev.ursinn.paper.nici.management.modules;
 
+import dev.ursinn.paper.nici.management.Utils;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
+import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -732,8 +735,10 @@ public class Message implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerChat(AsyncChatEvent event) {
+        Player player = event.getPlayer();
         Component message = event.message();
 
+        // Word Filter
         for (String word : wordList) {
             if (message.toString().toLowerCase().contains(word.toLowerCase())) {
                 TextReplacementConfig config = TextReplacementConfig.builder().match("(?i)" + word).replacement("*".repeat(word.length())).build();
@@ -741,7 +746,19 @@ public class Message implements Listener {
             }
         }
 
-        event.message(message);
+        Component component = Component.text()
+                .content("")
+                .append(Component.text("[").color(NamedTextColor.GRAY))
+                .append(Utils.getWorldName(player).color(NamedTextColor.YELLOW))
+                .append(Component.text("] ").color(NamedTextColor.GRAY))
+                .append(Utils.getPrefix(player))
+                .append(Component.text(":"))
+                .append(Component.space())
+                .append(message)
+                .build();
+
+        Bukkit.broadcast(component);
+        event.setCancelled(true);
     }
 
 }

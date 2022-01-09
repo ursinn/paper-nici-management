@@ -31,7 +31,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
@@ -51,10 +50,15 @@ public class TabList implements Listener {
         scoreboard.getTeams().forEach(team -> team.removePlayer(player));
 
         Objects.requireNonNull(scoreboard.getTeam("0009")).addPlayer(player);
+        if (player.hasPermission("nici.management.asilant")) {
+            Objects.requireNonNull(scoreboard.getTeam("0003")).addPlayer(player);
+        }
+        if (player.hasPermission("nici.management.adminrosa")) {
+            Objects.requireNonNull(scoreboard.getTeam("0002")).addPlayer(player);
+        }
         if (player.hasPermission("nici.management.admin")) {
             Objects.requireNonNull(scoreboard.getTeam("0001")).addPlayer(player);
         }
-
     }
 
     public static void registerScoreboardTeams(Scoreboard scoreboard) {
