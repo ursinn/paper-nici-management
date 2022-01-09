@@ -25,6 +25,7 @@
 package dev.ursinn.paper.nici.management;
 
 import dev.ursinn.paper.nici.management.modules.Message;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ManagementPlugin extends JavaPlugin {
@@ -32,6 +33,9 @@ public final class ManagementPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new Message(), this);
+        getServer().getPluginManager().registerEvents(new TabList(), this);
+
+        TabList.registerScoreboardTeams(Bukkit.getScoreboardManager().getMainScoreboard());
     }
 
     @Override
