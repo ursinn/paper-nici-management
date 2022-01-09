@@ -24,18 +24,8 @@
 
 package dev.ursinn.paper.nici.management;
 
-import dev.ursinn.paper.nici.management.modules.Message;
-import org.bukkit.plugin.java.JavaPlugin;
+public class Utils {
 
-public final class ManagementPlugin extends JavaPlugin {
+    private Utils() {}
 
-    @Override
-    public void onEnable() {
-        getServer().getPluginManager().registerEvents(new Message(), this);
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
 }
