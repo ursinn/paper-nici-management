@@ -1,0 +1,7 @@
+name: Management
+version: '${version}'
+main: dev.ursinn.paper.nici.management.ManagementPlugin
+api-version: 1.18
+authors: [ ursinn ]
+description: Management Plugin
+website: https://ursinn.dev
