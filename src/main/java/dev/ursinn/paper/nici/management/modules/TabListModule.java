@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package dev.ursinn.paper.nici.management;
+package dev.ursinn.paper.nici.management.modules;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -37,9 +37,9 @@ import org.bukkit.scoreboard.Team;
 
 import java.util.Objects;
 
-public class TabList implements Listener {
+public class TabListModule implements Listener {
 
-    public TabList() {
+    public TabListModule() {
         Bukkit.getLogger().info("Loaded TabList Module.");
     }
 

@@ -38,11 +38,11 @@ import org.bukkit.event.Listener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Message implements Listener {
+public class MessageModule implements Listener {
 
     private final List<String> wordList;
 
-    public Message() {
+    public MessageModule() {
         this.wordList = new ArrayList<>();
         
         initWordList();
