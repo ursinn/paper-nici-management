@@ -22,27 +22,23 @@
  * SOFTWARE.
  */
 
-package dev.ursinn.paper.nici.management;
+package dev.ursinn.paper.nici.management.modules;
 
-import dev.ursinn.paper.nici.management.modules.AnvilModule;
-import dev.ursinn.paper.nici.management.modules.MessageModule;
-import dev.ursinn.paper.nici.management.modules.TabListModule;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.PrepareAnvilEvent;
+import org.bukkit.inventory.AnvilInventory;
 
-public final class ManagementPlugin extends JavaPlugin {
+public class AnvilModule implements Listener {
 
-    @Override
-    public void onEnable() {
-        getServer().getPluginManager().registerEvents(new MessageModule(), this);
-        getServer().getPluginManager().registerEvents(new TabListModule(), this);
-        getServer().getPluginManager().registerEvents(new AnvilModule(), this);
+    @EventHandler
+    public void onAnvilPrepare(PrepareAnvilEvent event) {
+        AnvilInventory inventory = event.getInventory();
+        inventory.setMaximumRepairCost(40);
 
-        TabListModule.registerScoreboardTeams(Bukkit.getScoreboardManager().getMainScoreboard());
+        if (inventory.getRepairCost() > 40) {
+            inventory.setRepairCost(40);
+        }
     }
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
 }
