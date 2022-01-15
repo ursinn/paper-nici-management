@@ -4,6 +4,7 @@ plugins {
 
 group = 'dev.ursinn.paper.nici'
 version = '1.0-SNAPSHOT'
+description = 'PaperNiciManagement'
 
 repositories {
     mavenCentral()
@@ -41,3 +42,74 @@ processResources {
         expand props
     }
 }
+
+// Javadoc
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+// Publishing Stack - Start
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'management'
+            from components.java
+            pom {
+                packaging = 'jar'
+                name = 'PaperNiciManagement'
+                description = 'Management Plugin'
+                url = 'https://github.com/ursinn/paper-nici-management'
+                inceptionYear = '2022'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/ursinn/paper-nici-management/blob/main/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'ursinn'
+                        name = 'Ursin Filli'
+                        email = 'mail@ursinn.dev'
+                        timezone = '+1'
+                        url = 'https://ursinn.dev'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/ursinn/paper-nici-management.git'
+                    developerConnection = 'scm:git:git@github.com:ursinn/paper-nici-management.git'
+                    url = 'https://github.com/ursinn/paper-nici-management'
+                }
+                issueManagement {
+                    system = 'GitHub Issues'
+                    url = 'https://github.com/ursinn/paper-nici-management/issues'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2'
+            def snapshotsRepoUrl = 'https://s01.oss.sonatype.org/content/repositories/snapshots'
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username ossrhS01Username
+                password ossrhS01Password
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.mavenJava
+}
+
+// Publishing Stack - End
