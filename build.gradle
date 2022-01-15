@@ -36,6 +36,9 @@ tasks.withType(JavaCompile).configureEach {
     }
 }
 
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
 processResources {
     def props = [version: version]
     inputs.properties props
