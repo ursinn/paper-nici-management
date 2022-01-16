@@ -67,6 +67,8 @@ release {
     }
 }
 
+afterReleaseBuild.dependsOn publishing
+
 java {
     withJavadocJar()
     withSourcesJar()
