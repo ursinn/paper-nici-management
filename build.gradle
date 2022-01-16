@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'signing'
     id 'maven-publish'
+    id 'net.researchgate.release' version '2.8.1'
 }
 
 group = 'dev.ursinn.paper.nici'
@@ -55,12 +56,20 @@ javadoc {
     }
 }
 
-// Publishing Stack - Start
+// Release Plugin
+release {
+    git {
+        requireBranch = ''
+        signTag = true
+    }
+}
+
 java {
     withJavadocJar()
     withSourcesJar()
 }
 
+// Publish Plugin
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -112,9 +121,8 @@ publishing {
     }
 }
 
+// Signing Plugin
 signing {
     useGpgCmd()
     sign publishing.publications.mavenJava
 }
-
-// Publishing Stack - End
