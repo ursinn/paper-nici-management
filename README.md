@@ -8,8 +8,6 @@
 [![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/ursinn/paper-nici-management?logo=snyk&style=for-the-badge)](https://snyk.io/test/github/ursinn/paper-nici-management)
 [![License](https://img.shields.io/github/license/ursinn/paper-nici-management?style=for-the-badge)](https://github.com/ursinn/paper-nici-management/blob/main/LICENSE)
 
-## Description
-
 Management Plugin for [Paper](https://github.com/PaperMC/Paper)
 
 ## License
