@@ -59,7 +59,7 @@ javadoc {
 // Release Plugin
 release {
     ignoredSnapshotDependencies = [
-            'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
+            'io.papermc.paper:paper-api'
     ]
     git {
         requireBranch = ''
