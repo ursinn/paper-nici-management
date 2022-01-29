@@ -48,10 +48,8 @@ public class MessageModule implements Listener {
 
         // Word Filter
         for (String word : Utils.getBadWordsList()) {
-            if (message.toString().toLowerCase().contains(word.toLowerCase())) {
-                TextReplacementConfig config = TextReplacementConfig.builder().match("(?i)" + word).replacement("*".repeat(word.length())).build();
-                message = message.replaceText(config);
-            }
+            TextReplacementConfig config = TextReplacementConfig.builder().match("\\b(?i)" + word + "\\b").replacement("*".repeat(word.length())).build();
+            message = message.replaceText(config);
         }
 
         Component component = Component.text()
